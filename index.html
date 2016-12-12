@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Go Tchat</title>
+	<link rel="stylesheet" href="index.css">
+	<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="index.js"></script>
+</head>
+<body>
+	<div id="hide-block">
+		<div class="pseudo-block">
+		  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+		    <input class="mdl-textfield__input" type="text" id="pseudo">
+		    <label class="mdl-textfield__label" for="pseudo">Entrez un pseudo...</label>
+		  </div>
+		  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="btn">
+			 Button
+		  </button>
+		</div>
+	</div>
+
+	<div class="block-users">
+		<h1>Utilisateurs connectés:</h1>
+		<div id="user-connected">
+			
+		</div>
+	</div>
+	<div class="block-msg">
+		Message:
+		<div id="block-response">
+		</div>
+		<div class="block-write">
+			<h2>Entrez votre message :</h2>
+			<input type="text" id="message">
+			<input type="submit" id="btn-submit">
+		</div>
+	</div>
+	
+</body>
+</html>
