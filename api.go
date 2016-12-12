@@ -119,8 +119,6 @@ func Echo(ws *websocket.Conn) {
                         USERS_MSG,
                     }
 
-                    fmt.Println(resAllMsgSend)
-
                     err = websocket.JSON.Send(ws, resAllMsgSend);
                     if err != nil {
                         fmt.Println("Can't send all msg of users")
@@ -131,7 +129,7 @@ func Echo(ws *websocket.Conn) {
 
             }
 
-            // ENVOI DU NOUVEL UTILISATEUR COTE CLIENT
+            // ENVOI DE LA CONNEXION DU NOUVEL UTILISATEUR COTE CLIENT
             m.Lock()
             USERS_LIST[ws] = r.Pseudo
             m.Unlock()
@@ -150,7 +148,9 @@ func Echo(ws *websocket.Conn) {
                 } 
             }
 
-        } else if r.Recognizer == "newmessage" {
+        } 
+
+        if r.Recognizer == "newmessage" {
 
             chatMsg := &ChatMsg{
                 r.Pseudo,
@@ -177,45 +177,16 @@ func Echo(ws *websocket.Conn) {
                 } 
             }
 
+            fmt.Println(USERS_MSG)
+
         }
-        
-        // fmt.Println(reply)
-        // fmt.Println("Received back from client: " + reply)
-       
-        
-        // Réponse au client
-        // fmt.Println("Sending to client: " + msg)
-        // msg := "Received:  " + reply
 
-        // for _, userws := range LIST {
-        //     err = websocket.Message.Send(userws, msg);
-        //     if err != nil {
-        //         fmt.Println("Can't send")
-        //         // break
-        //     } 
-        // }
 
-        
-        
-        
     }
-
-
-
-
 
 }
 
-// func register(userwebsocket *websocket.Conn) {
-//     var LIST []*websocket.Conn
-//     var m = &sync.Mutex{}
 
-//     m.Lock()
-//     LIST = append(LIST, userwebsocket)
-//     m.Unlock()
-//     fmt.Printf("%v", LIST)
-//     break
-// }
 
 func main() {
     USERS_LIST = make(map[*websocket.Conn]string)
@@ -227,3 +198,4 @@ func main() {
         log.Fatal("ListenAndServe:", err)
     }
 }
+

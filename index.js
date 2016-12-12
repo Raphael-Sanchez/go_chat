@@ -2,12 +2,16 @@
 
     var sock = null;
     var wsuri = "ws://localhost:8000/ws";
-    var pseudoUser = "";
+    
 
     window.onload = function() {
 
         document.getElementById('btn').addEventListener("click", function() {
             var pseudo = document.getElementById('pseudo').value;
+            // var pseudoUser = "";
+            sessionStorage.setItem("pseudo", pseudo);
+            var pseudoUser = sessionStorage.getItem("pseudo");
+            console.log(pseudoUser);
             
             if (pseudo.length > 2) {
                 document.getElementById('hide-block').style.display = "none";
@@ -59,7 +63,7 @@
                     }
 
                     if (resFromApi["Recognizer"] == "newuser") {
-                        pseudoUser = resFromApi["Pseudo"];
+                        // pseudoUser = resFromApi["Pseudo"];
                     
                         var iDiv = document.createElement('div');
                         iDiv.id = resFromApi["Pseudo"];
@@ -86,6 +90,7 @@
 
                 document.getElementById('btn-submit').addEventListener("click", function() {
                     var msg = document.getElementById('message').value;
+                    console.log("pseudo :" + pseudoUser);
                     var newMsg = { "recognizer": "newmessage", "pseudo": pseudoUser, "msg": msg };
                     sock.send(JSON.stringify(newMsg));
                 });
